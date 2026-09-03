@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full-Component 3D Digitization &amp; Computational Analysis — Aerospace Capstone</title>
+<meta name="description" content="A Mississippi State aerospace engineering capstone project: on-aircraft 3D metrology, digital-twin CAD reconstruction, and CFD analysis of as-flown aerodynamic surfaces.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav class="nav">
+  <div class="container">
+    <a href="#top" class="brand">
+      <span class="brand-mark">
+        <img src="assets/images/msu-badge.jpg" alt="Mississippi State University">
+      </span>
+      <span>Full-Component 3D Digitization<br><small>ASE 4712 · Aerospace Capstone I</small></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#objectives">Objectives</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#advisors">Advisors</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#team" class="btn btn-ghost" style="padding:9px 18px;">Meet the Team</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-field" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-plane-wrap" aria-hidden="true">
+    <svg class="hero-plane-trail" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 340 C 120 300 220 220 340 60" stroke="url(#trailLine)" stroke-width="2" stroke-dasharray="1 10" stroke-linecap="round" fill="none"/>
+    </svg>
+    <svg class="hero-plane" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100,6 L109,58 L182,146 L180,158 L112,136 L109,172 L146,206 L144,215 L105,196 L100,232 L95,196 L56,215 L54,206 L91,172 L88,136 L20,158 L18,146 L91,58 Z"
+            fill="url(#planeFill)" stroke="var(--white)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+      <ellipse cx="100" cy="42" rx="6.5" ry="15" fill="var(--navy-900)" stroke="var(--white)" stroke-width="1.2" opacity="0.9"/>
+    </svg>
+    <svg width="0" height="0">
+      <defs>
+        <linearGradient id="planeFill" x1="18" y1="215" x2="182" y2="6" gradientUnits="userSpaceOnUse">
+          <stop offset="0" style="stop-color:var(--cyan-300); stop-opacity:0.35"/>
+          <stop offset="1" style="stop-color:var(--white); stop-opacity:0.55"/>
+        </linearGradient>
+        <linearGradient id="trailLine" x1="20" y1="340" x2="340" y2="60" gradientUnits="userSpaceOnUse">
+          <stop offset="0" style="stop-color:var(--white); stop-opacity:0"/>
+          <stop offset="1" style="stop-color:var(--white); stop-opacity:0.55"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="container hero-inner">
+    <span class="eyebrow">Senior Capstone · Mississippi State University</span>
+    <div class="hero-meta">
+      <span>ASE 4712 — Aerospace Capstone I</span>
+      <span>Aeronautics Concentration</span>
+      <span>Fall 2026</span>
+    </div>
+    <h1>Digitizing <em>as-flown</em> airframes to measure what flight hours actually do to them</h1>
+    <p class="hero-lede">
+      A full-component 3D metrology and computational analysis framework for legacy aircraft —
+      capturing real, weathered airframe geometry with high-resolution optical scanning,
+      rebuilding it in SolidWorks as a digital twin, and quantifying its true aerodynamic
+      penalties with CFD.
+    </p>
+    <div class="hero-actions">
+      <a href="#timeline" class="btn btn-primary">
+        View Project Timeline
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#team" class="btn btn-ghost">Meet the Team</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+<!-- ============================= OVERVIEW ============================= -->
+<section id="overview" data-light data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Problem</span>
+      <h2>When the CAD files don't exist anymore, neither does the truth about the airframe</h2>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-copy">
+        <p>
+          Legacy and aging aircraft frequently operate where original tooling, replacement parts, and
+          native CAD files simply don't exist. These airframes rely on compound-curved aerodynamic
+          surfaces that are difficult to measure accurately with traditional hand tools without
+          stacking up dimensional error. Over hundreds or thousands of flight hours, airframes
+          accumulate <strong>skin waviness, fastener head wear, paint erosion, and localized surface
+          damage.</strong> Because operators lack accurate digital models of the true "as-flown"
+          hardware, it's tough to quantify how much these surfaces have drifted from nominal specs,
+          verify symmetry across the airframe, or model real-world aerodynamic performance.
+        </p>
+        <p>
+          To close that gap, this project establishes an <strong>on-aircraft 3D metrology and
+          reverse-engineering framework.</strong> High-resolution optical 3D scanning captures dense
+          point clouds of critical aerodynamic contours and localized damage zones on an operational
+          aircraft in Starkville. That scan data is processed and imported into SolidWorks to build
+          both a nominal reference model and an as-flown digital twin.
+        </p>
+        <p>
+          A geometric deviation study compares mirrored symmetric counterparts — port vs. starboard
+          wings or horizontal stabilizers — to measure physical airframe drift and asymmetry caused by
+          flight hours. Computational Fluid Dynamics (CFD) is then run on both the nominal and scanned
+          geometries to evaluate the real aerodynamic penalties of these imperfections: boundary layer
+          transitions, surface pressure changes, and section drag increases.
+        </p>
+      </div>
+      <div class="gap-card">
+        <h3>Why it's hard to answer today</h3>
+        <ul class="gap-list">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 21H22L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>
+            No native CAD or original tooling exists for most legacy airframes in service today.
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 21H22L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>
+            Compound-curved outer mold lines can't be measured accurately by hand without stacking dimensional error.
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 21H22L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>
+            Skin waviness, fastener wear, and paint erosion accumulate silently over thousands of flight hours.
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 21H22L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>
+            Without an as-flown model, there's no way to verify symmetry or model true aerodynamic performance.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= OBJECTIVES ============================= -->
+<section id="objectives" data-tint data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Overall Project Objectives</span>
+      <h2>Four technical objectives, from scan to CFD</h2>
+      <p>To establish and validate the digital metrology and aerodynamic analysis framework, the project executes four core technical objectives.</p>
+    </div>
+
+    <div class="obj-grid">
+      <article class="obj-card" data-reveal>
+        <div class="obj-num">01</div>
+        <h3>Full-Component 3D Metrology</h3>
+        <p>Deploy high-resolution optical 3D scanning on an operational aircraft in Starkville to capture compound-curved outer mold lines (OML) across critical flight surfaces, generating dense spatial point clouds of the true physical condition — skin waviness, fastener profiles, paint erosion, and localized damage.</p>
+      </article>
+      <article class="obj-card" data-reveal>
+        <div class="obj-num">02</div>
+        <h3>Parametric CAD &amp; Digital Twin Modeling</h3>
+        <p>Bridge raw scan point clouds into SolidWorks to reconstruct accurate CAD geometry — an idealized nominal CAD model, and a faceted as-flown digital twin that directly preserves the scanned surface irregularities for downstream analysis.</p>
+      </article>
+      <article class="obj-card" data-reveal>
+        <div class="obj-num">03</div>
+        <h3>Comparative Geometric Deviation Analysis</h3>
+        <p>Generate full-field 3D deviation heatmaps to quantify physical discrepancies across the airframe, comparing mirrored symmetric counterparts and measuring localized damage against the nominal reference geometry.</p>
+        <div class="obj-subgrid">
+          <div class="obj-sub" data-reveal>
+            <span class="obj-sub-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3V21" stroke="currentColor" stroke-width="1.8" stroke-dasharray="2 3"/><path d="M6 6L4 8L6 10M18 6L20 8L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <span class="obj-sub-label">3a — Bilateral Symmetry</span>
+              <p>Mirror and compare symmetric counterparts — e.g. port vs. starboard wings or horizontal stabilizers — to measure geometric drift accumulated over operational flight hours.</p>
+            </div>
+          </div>
+          <div class="obj-sub" data-reveal>
+            <span class="obj-sub-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+            </span>
+            <div>
+              <span class="obj-sub-label">3b — Damage Profiling</span>
+              <p>Measure localized dents, repairs, or surface wear directly against the nominal reference geometry.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="obj-card" data-reveal>
+        <div class="obj-num">04</div>
+        <h3>Aerodynamic Computational Analysis (CFD)</h3>
+        <p>Run comparative CFD simulations evaluating the clean nominal baseline against the scanned as-flown geometry to quantify the real aerodynamic penalties of surface degradation.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TIMELINE ============================= -->
+<section id="timeline" data-dark data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Project Schedule</span>
+      <h2>Aug 19 – Nov 20, 2026</h2>
+    </div>
+
+    <div class="gantt-legend">
+      <span class="gantt-legend-item"><span class="gantt-swatch gantt-swatch-bar"></span>Work window</span>
+      <span class="gantt-legend-item"><span class="gantt-swatch gantt-swatch-dot"></span>Hard deadline</span>
+    </div>
+
+    <div class="gantt">
+      <div class="gantt-row gantt-months-row">
+        <div></div>
+        <div class="gantt-months">
+          <span style="left:0%">August</span>
+          <span style="left:13.98%">September</span>
+          <span style="left:46.24%">October</span>
+          <span style="left:79.57%">November</span>
+        </div>
+      </div>
+
+      <div class="gantt-rows">
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Course Intro &amp; Team Formation Kickoff</span><span class="gantt-date">Due Aug 19</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:0%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Draft Idea</span><span class="gantt-date">Aug 19 – Aug 28</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:0%; --w:9.68%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Emerging Technology Topic Assigned</span><span class="gantt-date">Due Aug 28</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:9.68%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Draft SOW / Proposal / Website</span><span class="gantt-date">Aug 28 – Sep 4</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:9.68%; --w:7.52%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">SOW, Proposal &amp; Project Website Due</span><span class="gantt-date">Due Sep 4</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:17.2%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Project Planning &amp; Logistics</span><span class="gantt-date">Sep 7 – Oct 2</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:20.43%; --w:26.88%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Literature Search (Review #1)</span><span class="gantt-date">Sep 9 – Sep 14</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:22.58%; --w:5.38%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Draft Article Review #1</span><span class="gantt-date">Sep 14 – Sep 17</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:27.96%; --w:3.22%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Article Review #1 Due</span><span class="gantt-date">Due Sep 18</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:32.26%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Literature Search (Review #2)</span><span class="gantt-date">Sep 21 – Sep 25</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:35.48%; --w:4.3%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Prepare Monthly Update (Sept.)</span><span class="gantt-date">Sep 25 – Sep 29</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:39.78%; --w:4.31%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Monthly Update (Sept.) Due</span><span class="gantt-date">Due Sep 30</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:45.16%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Draft Article Review #2</span><span class="gantt-date">Sep 28 – Oct 1</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:43.01%; --w:3.23%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Article Review #2 Due</span><span class="gantt-date">Due Oct 2</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:47.31%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Scan Aircraft Parts → SolidWorks</span><span class="gantt-date">Oct 2 – Oct 14</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:47.31%; --w:12.91%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Refine Modeling in SolidWorks</span><span class="gantt-date">Oct 14 – Oct 28</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:60.22%; --w:15.05%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Prepare Monthly Update (Oct.)</span><span class="gantt-date">Oct 26 – Oct 29</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:73.12%; --w:3.22%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Monthly Update (Oct.) Due</span><span class="gantt-date">Due Oct 30</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:77.42%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Draft Semester Write-Up</span><span class="gantt-date">Nov 2 – Nov 19</span></div>
+            <div class="gantt-track"><span class="gantt-bar" style="left:80.65%; --w:18.27%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">End of Semester Write-Up Due</span><span class="gantt-date">Due Nov 20</span></div>
+            <div class="gantt-track"><span class="gantt-milestone" style="left:100%"></span></div>
+          </div>
+          <div class="gantt-row" data-reveal>
+            <div class="gantt-label"><span class="gantt-task">Advisor Meeting / Update</span><span class="gantt-date">Every other week</span></div>
+            <div class="gantt-track">
+              <span class="gantt-tick" style="left:7.53%"></span>
+              <span class="gantt-tick" style="left:22.58%"></span>
+              <span class="gantt-tick" style="left:37.63%"></span>
+              <span class="gantt-tick" style="left:52.69%"></span>
+              <span class="gantt-tick" style="left:67.74%"></span>
+              <span class="gantt-tick" style="left:82.8%"></span>
+              <span class="gantt-tick" style="left:97.85%"></span>
+            </div>
+          </div>
+      </div>
+    </div>
+    <p class="timeline-note">Dr. Way and Mr. Wolz join the team for an advisor check-in every other week throughout the semester.</p>
+  </div>
+</section>
+
+<!-- ============================= TEAM ============================= -->
+<section id="team" data-light data-reveal>
+  <div class="container">
+    <div class="section-head section-head-team">
+      <div>
+        <span class="eyebrow">The Team</span>
+        <h2>Meet the Team</h2>
+        <p>Both aerospace engineering seniors with an aeronautics concentration at Mississippi State University.</p>
+      </div>
+      <img src="assets/images/msu-mark-maroon.png" alt="Mississippi State University" class="section-head-mark">
+    </div>
+
+    <div class="team-photo-wrap" data-initials="C · C">
+      <img src="assets/images/team-group.jpg" alt="Cole Monahan and Caden Detre in the machine shop, holding a formed sheet-metal bracket" style="object-position: 50% 32%;">
+    </div>
+
+    <div class="member-grid">
+      <article class="member-card" data-reveal>
+        <div class="member-top">
+          <div class="member-photo" data-initials="CD">
+            <img src="assets/images/caden.jpg" alt="Portrait of Caden Detre" style="object-position: 50% 6%;">
+          </div>
+          <div>
+            <div class="member-name">Caden Detre</div>
+            <div class="member-role">Metrology Lead &amp; CAD/Structural Integration</div>
+            <div class="member-loc">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-7.2 8-13a8 8 0 1 0-16 0c0 5.8 8 13 8 13Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.6" stroke="currentColor" stroke-width="1.8"/></svg>
+              Zachary, LA
+            </div>
+          </div>
+        </div>
+        <h4>Core Focus</h4>
+        <p style="font-size:14px;color:var(--slate-700);margin-bottom:20px;">Field 3D scanning execution, point-cloud post-processing, parametric SolidWorks reconstruction, and geometric deviation inspection.</p>
+        <h4>Key Responsibilities</h4>
+        <ul class="member-list">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Coordinate on-site access to the aircraft in Starkville; manage target-tracking setup and optical 3D scanning passes.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Post-process raw scan data — mesh cleanup, noise filtering, coordinate-system alignment — and extract 2D cross-sectional spline profiles.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Build the parametric nominal CAD models and generate the as-flown faceted digital twin geometries.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Perform pre-analysis 3D surface deviation heatmaps to quantify bilateral asymmetry and localized skin damage depth.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Correlate physical scan deviations with underlying structural load paths alongside Mr. Wolz.</li>
+        </ul>
+      </article>
+
+      <article class="member-card" data-reveal>
+        <div class="member-top">
+          <div class="member-photo" data-initials="CM">
+            <img src="assets/images/cole.jpg" alt="Portrait of Cole Monahan" style="object-position: 50% 12%;">
+          </div>
+          <div>
+            <div class="member-name">Cole Monahan</div>
+            <div class="member-role">Computational Aerodynamics &amp; CFD Lead</div>
+            <div class="member-loc">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-7.2 8-13a8 8 0 1 0-16 0c0 5.8 8 13 8 13Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.6" stroke="currentColor" stroke-width="1.8"/></svg>
+              Columbus, MS
+            </div>
+          </div>
+        </div>
+        <h4>Core Focus</h4>
+        <p style="font-size:14px;color:var(--slate-700);margin-bottom:20px;">Computational fluid grid generation, CFD solver execution, flow-field analysis, and aerodynamic post-processing.</p>
+        <h4>Key Responsibilities</h4>
+        <ul class="member-list">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Define computational fluid domain boundaries, farfield conditions, and grid resolution strategies for both nominal and as-flown geometries.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Configure boundary-layer inflation layers to capture near-wall velocity gradients, skin friction, and transition behavior around imperfections.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Set up and run steady-state Reynolds-Averaged Navier–Stokes simulations across relevant angles of attack and flight Mach numbers.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Post-process CFD solutions to quantify section drag deltas, lift curve slopes, pressure coefficient spikes, and separation bubbles.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Coordinate directly with Dr. Way on solver verification, turbulence model selection, and grid convergence studies.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="shared-card">
+      <h4>Shared Technical &amp; Management Contributions</h4>
+      <ul class="shared-grid">
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Collaborate on the overall statement of work, research, and regular progress reports for faculty advisors.</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Jointly analyze the final aero-structural correlation — mapping measured physical deviations to aerodynamic drag and trim penalties.</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Co-author the final technical report and assemble the capstone poster presentation and deliverables.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= ADVISORS ============================= -->
+<section id="advisors" data-dark data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Faculty Advisors</span>
+      <h2>Guided by two advisors who keep the science and the shop work honest</h2>
+    </div>
+
+    <div class="advisor-grid">
+      <article class="advisor-card" data-reveal>
+        <div class="advisor-photo">AW</div>
+        <div>
+          <h3>Dr. Alexander Way</h3>
+          <div class="advisor-role">Faculty Advisor</div>
+          <p>Coordinates directly with the team on solver verification, turbulence model selection, and grid convergence studies for the CFD analysis.</p>
+          <span class="advisor-badge">Photo coming soon</span>
+        </div>
+      </article>
+      <article class="advisor-card" data-reveal>
+        <div class="advisor-photo">
+          <img src="assets/images/wolz.jpg" alt="Portrait of Mr. Rob Wolz" style="object-position: 50% 20%;">
+        </div>
+        <div>
+          <h3>Mr. Rob Wolz</h3>
+          <div class="advisor-role">Faculty Advisor</div>
+          <p>Works alongside the team to correlate physical scan deviations with the airframe's underlying structural load paths.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PROCESS ============================= -->
+<section data-tint data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Reporting &amp; Process</span>
+      <h2>How we keep advisors in the loop</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card" data-reveal>
+        <div class="process-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1 4 21 4.9 21 6V20C21 21.1 20.1 22 19 22H5C3.9 22 3 21.1 3 20V6C3 4.9 3.9 4 5 4Z" stroke="currentColor" stroke-width="1.8"/></svg></div>
+        <h3>Bi-Weekly Check-ins</h3>
+        <p>Meet with Dr. Way and Mr. Wolz every two weeks to review completed work, discuss roadblocks, and confirm next steps.</p>
+      </div>
+      <div class="process-card" data-reveal>
+        <div class="process-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 9H16M8 13H16M8 17H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Progress Updates</h3>
+        <p>A summary email before each check-in — recent progress, current tasks, and open questions for advisor feedback.</p>
+      </div>
+      <div class="process-card" data-reveal>
+        <div class="process-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 22C17 22 21 18 21 13V5L12 2L3 5V13C3 18 7 22 12 22Z" stroke="currentColor" stroke-width="1.8"/></svg></div>
+        <h3>Phase Gate Reviews</h3>
+        <p>Advisors sign off before each major phase — verifying scan quality before CAD modeling, and CFD mesh setups before full runs.</p>
+      </div>
+      <div class="process-card" data-reveal>
+        <div class="process-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 7C4 5.9 4.9 5 6 5H10L12 8H18C19.1 8 20 8.9 20 10V17C20 18.1 19.1 19 18 19H6C4.9 19 4 18.1 4 17V7Z" stroke="currentColor" stroke-width="1.8"/></svg></div>
+        <h3>Shared File Archive</h3>
+        <p>Raw scans, CAD models, CFD cases, and meeting notes stay organized on a shared drive, accessible to the team and advisors.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-mark">
+          <img src="assets/images/msu-badge.jpg" alt="Mississippi State University">
+        </span>
+        <div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--white);">Full-Component 3D Digitization</div>
+          <div style="font-size:12.5px;color:var(--slate-500);">Aerospace Capstone I · Mississippi State University</div>
+        </div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#objectives">Objectives</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#advisors">Advisors</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-seal">
+        <img src="assets/images/flyingm-mark-white.png" alt="">
+        © <span data-year></span> Cole Monahan &amp; Caden Detre. ASE 4712 Capstone Project.
+      </span>
+      <span>Advisors: Dr. Alexander Way · Mr. Rob Wolz</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
