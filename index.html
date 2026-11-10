@@ -7,13 +7,40 @@
 <meta name="description" content="A Mississippi State aerospace engineering capstone project: on-aircraft 3D metrology, digital-twin CAD reconstruction, and CFD analysis of as-flown aerodynamic surfaces.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="icon" type="image/png" href="assets/images/favicon.png">
 </head>
 <body>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Shared line-art of the Grumman AA-5B Tiger (side view, nose right). Drawn once here;
+     the hero scan, the point cloud sampler and the nav flight-progress plane all reuse it. -->
+<svg class="tiger-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="tigerMesh" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
+      <path d="M0 0H9M0 0V9" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" fill="none"/>
+    </pattern>
+  </defs>
+  <g id="tiger-geo">
+    <path id="tiger-wing" d="M394 164 C390 157 340 154 266 160 L266 167 C340 171 390 172 394 164 Z"/>
+    <path id="tiger-main-gear" d="M336 173 L346 173 L357 196 L351 198 Z"/>
+    <circle id="tiger-main-wheel" cx="354" cy="210" r="16"/>
+    <circle cx="354" cy="210" r="6"/>
+    <path id="tiger-nose-gear" d="M481 171 L489 171 L494 199 L488 200 Z"/>
+    <circle id="tiger-nose-wheel" cx="491" cy="214" r="12"/>
+    <circle cx="491" cy="214" r="4"/>
+    <path id="tiger-stab" d="M52 115 L130 105 L132 110 L56 121 Z"/>
+    <path id="tiger-fin" d="M152 103 L96 38 L66 38 L60 110 Z"/>
+    <path d="M84 38 L90 106" fill="none"/>
+    <path id="tiger-fuselage" d="M538 104 L470 98 C458 94 448 88 436 78 C418 64 392 56 360 54 C322 52 284 66 258 84 C244 94 232 98 214 100 C160 104 100 106 66 110 L50 114 L52 120 C80 132 120 150 160 160 C210 170 270 174 330 174 C400 174 452 172 500 170 L538 168 Z"/>
+    <path id="tiger-glass" d="M470 98 C458 94 448 88 436 78 C418 64 392 56 360 54 C322 52 284 66 258 84 C250 92 246 97 240 99 Z"/>
+    <path d="M336 53 L332 99 M442 82 L453 99 M228 98 L220 76" fill="none"/>
+    <path id="tiger-spinner" d="M538 116 C552 119 566 127 566 136 C566 145 552 153 538 156 Z"/>
+    <path id="tiger-prop" d="M541 62 C547 90 547 114 542 134 C547 154 547 178 541 206 C535 178 535 154 540 134 C535 114 535 90 541 62 Z"/>
+  </g>
+</svg>
 
 <nav class="nav">
   <div class="container">
@@ -37,32 +64,30 @@
       </button>
     </div>
   </div>
+  <div class="flight" aria-hidden="true">
+    <div class="flight-line"></div>
+    <div class="flight-fill"></div>
+    <svg class="flight-plane" viewBox="44 30 534 200"><use href="#tiger-geo" fill="rgba(255,255,255,0.14)"/></svg>
+  </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="hero-field" aria-hidden="true"></div>
   <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-plane-wrap" aria-hidden="true">
-    <svg class="hero-plane-trail" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 340 C 120 300 220 220 340 60" stroke="url(#trailLine)" stroke-width="2" stroke-dasharray="1 10" stroke-linecap="round" fill="none"/>
-    </svg>
-    <svg class="hero-plane" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-      <path d="M100,6 L109,58 L182,146 L180,158 L112,136 L109,172 L146,206 L144,215 L105,196 L100,232 L95,196 L56,215 L54,206 L91,172 L88,136 L20,158 L18,146 L91,58 Z"
-            fill="url(#planeFill)" stroke="var(--white)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-      <ellipse cx="100" cy="42" rx="6.5" ry="15" fill="var(--navy-900)" stroke="var(--white)" stroke-width="1.2" opacity="0.9"/>
-    </svg>
-    <svg width="0" height="0">
-      <defs>
-        <linearGradient id="planeFill" x1="18" y1="215" x2="182" y2="6" gradientUnits="userSpaceOnUse">
-          <stop offset="0" style="stop-color:var(--cyan-300); stop-opacity:0.35"/>
-          <stop offset="1" style="stop-color:var(--white); stop-opacity:0.55"/>
-        </linearGradient>
-        <linearGradient id="trailLine" x1="20" y1="340" x2="340" y2="60" gradientUnits="userSpaceOnUse">
-          <stop offset="0" style="stop-color:var(--white); stop-opacity:0"/>
-          <stop offset="1" style="stop-color:var(--white); stop-opacity:0.55"/>
-        </linearGradient>
-      </defs>
-    </svg>
+  <div class="hero-tiger" aria-hidden="true">
+    <div class="hero-tiger-fly">
+      <div class="tiger-stage">
+        <svg class="tiger-layer" viewBox="0 0 600 240"><line class="tiger-ground" x1="30" y1="226" x2="590" y2="226"/></svg>
+        <svg class="tiger-layer tiger-base" viewBox="0 0 600 240"><use href="#tiger-geo" fill="rgba(255,255,255,0.035)"/></svg>
+        <svg class="tiger-layer tiger-scanned" viewBox="0 0 600 240"><use href="#tiger-geo" fill="url(#tigerMesh)"/></svg>
+        <svg class="tiger-layer tiger-points" viewBox="0 0 600 240"><g class="tiger-points-g"></g></svg>
+        <div class="scan-beam"></div>
+      </div>
+      <div class="tiger-tag">
+        <strong>Grumman AA-5B Tiger</strong>
+        <span>3D scan <b class="tiger-pct"></b></span>
+      </div>
+    </div>
   </div>
 
   <div class="container hero-inner">
@@ -71,8 +96,14 @@
       <span>ASE 4712 — Aerospace Capstone I</span>
       <span>Aeronautics Concentration</span>
       <span>Fall 2026</span>
+      <span>Scan subject: Grumman AA-5B Tiger</span>
     </div>
-    <h1>Digitizing <em>as-flown</em> airframes to measure what flight hours actually do to them</h1>
+    <h1 class="hero-title">
+      <span class="hero-title-top">Full-Component 3D</span>
+      <span class="hero-title-main">Digitization</span>
+      <span class="hero-title-sub">&amp; Computational Analysis</span>
+    </h1>
+    <p class="hero-tagline">Digitizing <em>as-flown</em> airframes to measure what flight hours actually do to them</p>
     <p class="hero-lede">
       A full-component 3D metrology and computational analysis framework for legacy aircraft —
       capturing real, weathered airframe geometry with high-resolution optical scanning,
